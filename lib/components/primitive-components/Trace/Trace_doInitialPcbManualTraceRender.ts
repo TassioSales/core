@@ -15,7 +15,7 @@ import { TraceConnectionError } from "lib/errors"
 import { getPcbSelectorErrorForTracePort } from "./getPcbSelectorErrorForTracePort"
 import { jlcMinTolerances } from "@tscircuit/jlcpcb-manufacturing-specs"
 import { getViaSpanLayers } from "lib/utils/getViaSpanLayers"
-import { renderPcbPaths } from "./render-pcb-paths"
+import { renderPcbPathRoute, renderPcbPaths } from "./render-pcb-paths"
 
 const findInflatedPcbViaForPoint = (
   vias: PcbVia[] | undefined,
@@ -471,44 +471,5 @@ export function Trace_doInitialPcbManualTraceRender(trace: Trace) {
     })
   }
 
-  const traceLength = getTraceLength(route)
-  const pcb_trace = db.pcb_trace.insert({
-    route,
-    is_antenna_trace: trace.isAntennaTrace,
-    source_trace_id: trace.source_trace_id!,
-    subcircuit_id: subcircuit?.subcircuit_id ?? undefined,
-    pcb_group_id: trace.getGroup()?.pcb_group_id ?? undefined,
-    trace_length: traceLength,
-  })
-  const subcircuitConnectivityMapKey =
-    trace.subcircuit_connectivity_map_key ??
-    db.source_trace.get(trace.source_trace_id!)?.subcircuit_connectivity_map_key
-  const pcbStyle = trace.getInheritedMergedProperty("pcbStyle")
-  const { holeDiameter, padDiameter } = getViaDiameterDefaults(pcbStyle)
-  for (const point of route) {
-    if (point.route_type === "via") {
-      const fromLayer = point.from_layer as LayerRef
-      const toLayer = point.to_layer as LayerRef
-      db.pcb_via.insert({
-        pcb_trace_id: pcb_trace.pcb_trace_id,
-        x: point.x,
-        y: point.y,
-        hole_diameter: holeDiameter,
-        outer_diameter: padDiameter,
-        layers: getViaSpanLayers({
-          fromLayer,
-          toLayer,
-          layerCount: subcircuit._getSubcircuitLayerCount(),
-        }),
-        from_layer: fromLayer,
-        to_layer: toLayer,
-        subcircuit_id: subcircuit?.subcircuit_id ?? undefined,
-        pcb_group_id: trace.getGroup()?.pcb_group_id ?? undefined,
-        subcircuit_connectivity_map_key: subcircuitConnectivityMapKey,
-      })
-    }
-  }
-  trace._portsRoutedOnPcb = ports
-  trace.pcb_trace_id = pcb_trace.pcb_trace_id
-  trace._insertErrorIfTraceIsOutsideBoard(route, ports)
+  renderPcbPathRoute(trace, route, ports)
 }

@@ -3,7 +3,7 @@ import {
   manualViaTransitionCases,
   renderManualViaTransition,
 } from "tests/fixtures/manual-via-transition"
-test.failing("manual vias reject disconnected incoming copper", async () => {
+test("manual vias reject disconnected incoming copper", async () => {
   const results = []
   for (const api of ["pcbPath", "pcbPaths"] as const) {
     for (const scenario of manualViaTransitionCases.filter(
