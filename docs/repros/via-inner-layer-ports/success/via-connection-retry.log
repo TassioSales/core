@@ -1,9 +1,0 @@
-bun test v1.3.14 (0d9b296a)
-
-tests/components/primitive-components/via-connect-trace.test.tsx:
-(pass) allows traces to connect to via layers [2402.96ms]
-
- 1 pass
- 0 fail
- 2 expect() calls
-Ran 1 test across 1 file. [3.68s]
