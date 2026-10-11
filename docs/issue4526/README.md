@@ -2,6 +2,7 @@
 
 Related issue: https://github.com/tscircuit/core/issues/4526
 Reproduction PR: https://github.com/tscircuit/core/pull/4528
+Fix PR: https://github.com/tscircuit/core/pull/4529 (initial base: reproduction branch)
 
 The signal uses `top → inner2 → top` on a four-layer PCB. With blind/buried
 vias disabled, ordinary drilled barrels must occupy `top`, `inner1`, `inner2`,
