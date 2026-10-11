@@ -156,7 +156,7 @@ beforeAll(async () => {
   await expect(circuit).toMatchPcbSnapshot(import.meta.path)
 })
 
-test.failing("a matched bus cannot silently omit a pre-routed member", () => {
+test("a matched bus cannot silently omit a pre-routed member", () => {
   // Main emits 28 mm and 20 mm copper, then reports 8 mm complete-bus skew.
   // Reject before routing instead of constraining only part of the bus.
   expect(phaseInputs).toHaveLength(0)

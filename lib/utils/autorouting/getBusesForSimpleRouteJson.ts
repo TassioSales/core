@@ -1,5 +1,6 @@
 import { getBusSourceTraceIdOrThrow } from "./getBusSourceTraceIdOrThrow"
 import { getBusTargetLengthBounds } from "./getBusTargetLengthBounds"
+import { rejectPreservedBusLengthMatchingForSrjOrThrow } from "./reject-preserved-bus-length-matching-for-srj"
 import type { SourceNet, SourceTrace } from "circuit-json"
 import type { Bus } from "lib/components/primitive-components/Bus"
 import type {
@@ -149,6 +150,7 @@ export const getBusesForSimpleRouteJson = ({
     const busSourceTraces = sourceTraces.filter(
       (sourceTrace) => sourceTrace.subcircuit_id === busSubcircuitId,
     )
+    const preservedBusSourceTraceIds = new Set<SourceTrace["source_trace_id"]>()
     const connectionNames = bus._parsedProps.connections.flatMap(
       (traceNameOrPortSelector) => {
         const sourceTraceId = getBusSourceTraceIdOrThrow({
@@ -158,7 +160,10 @@ export const getBusesForSimpleRouteJson = ({
         })
         // Fixed copper has no pending SRJ connection; source_bus still keeps
         // every member so routing DRC checks the complete bus.
-        if (preservedSourceTraceIds?.has(sourceTraceId)) return []
+        if (preservedSourceTraceIds?.has(sourceTraceId)) {
+          preservedBusSourceTraceIds.add(sourceTraceId)
+          return []
+        }
         return getBusSrjConnectionNamesOrThrow({
           srjConnections,
           bus,
@@ -177,6 +182,10 @@ export const getBusesForSimpleRouteJson = ({
 
     if (connectionNames.length === 0) continue
 
+    rejectPreservedBusLengthMatchingForSrjOrThrow({
+      bus,
+      preservedSourceTraceIds: preservedBusSourceTraceIds,
+    })
     declaredSrjBuses.push({
       busId: bus.name,
       name: bus.name,
