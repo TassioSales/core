@@ -142,13 +142,4 @@ const checkManualViaSpan = async (config: (typeof cases)[number]) => {
   }
 }
 
-for (const config of cases) {
-  // CI runs the known failures; local runs expose them as ordinary failures.
-  test.failingIf(
-    process.env.CI === "true" &&
-      config.layerCount > 2 &&
-      !config.allowBlindAndBuriedVias,
-  )(`manual via physical span: ${JSON.stringify(config)}`, () =>
-    checkManualViaSpan(config),
-  )
-}
+test.each(cases)("manual via physical span: %j", checkManualViaSpan)
