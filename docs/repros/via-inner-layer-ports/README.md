@@ -27,4 +27,12 @@ The annotated layer section is derived from emitted Circuit JSON: every barrel u
 
 A separate pre-existing checks diagnostic reports dangling endpoints even for a valid two-layer top-to-top via control. The regression asserts missing-port errors and real copper/port attachment rather than hiding that diagnostic or requiring unrelated DRC changes. Raw emitted JSON preserves all diagnostics.
 
+## Passing evidence
+
+![PASS: emitted inner2 copper](success/layer-stack.png)
+
+The same two regression files pass after port creation moves to `InitializePortsFromChildren`, where the actual board stack is available. All 208 matrix cases pass. The constructor and its parsed-input mutation are removed; the physical renderer is unchanged. Recorded source and PCB ports both increase from four to eight, missing-port errors drop from two to zero, and one inner2 trace appears. Positions, spans, from/to layers and barrel diameters match the failing output exactly.
+
+The expected inner2 PCB snapshot was created only after its behavioral assertions passed, then matched on a second run. Both layer sections and their image diff were inspected: the full barrels and outer-layer ports stay in place while the inner ports and copper appear.
+
 Merge order: reproduction PR into main, then retarget the dependent fix PR to main and merge it. The reproduction PR intentionally fails until the dependent fix lands.

@@ -1,0 +1,13 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/repros/repro-via-layer-ports-matrix.test.tsx:
+Via port matrix: 208/208 cases passed
+(pass) via layer ports cover the board-aware span and route each occupied layer [23519.38ms]
+
+tests/repros/repro-via-inner2-ports.test.tsx:
+(pass) ordinary through vias expose inner2 and emit the requested copper [249.33ms]
+
+ 2 pass
+ 0 fail
+ 3751 expect() calls
+Ran 2 tests across 2 files. [39.94s]

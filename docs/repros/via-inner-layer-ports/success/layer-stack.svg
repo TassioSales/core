@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="530" viewBox="0 0 1080 530">
+<rect width="1080" height="530" fill="#fff"/>
+<g font-family="Arial, sans-serif" fill="#1d1d1f">
+<text x="540" y="35" text-anchor="middle" font-size="13" fill="#86868b">tscircuit/core · React circuits → PCB geometry</text>
+<text x="540" y="72" text-anchor="middle" font-size="26" font-weight="600">Through-hole vias · inner2 connection</text>
+<text x="540" y="103" text-anchor="middle" font-size="15" font-weight="600" fill="#008965">PASS · Copper connected</text>
+<line x1="190" y1="190" x2="890" y2="190" stroke="#e5e5ea" stroke-width="2"/>
+<text x="155" y="195" text-anchor="end" font-size="15" fill="#86868b">top</text>
+<line x1="190" y1="250" x2="890" y2="250" stroke="#e5e5ea" stroke-width="2"/>
+<text x="155" y="255" text-anchor="end" font-size="15" fill="#86868b">inner1</text>
+<line x1="190" y1="310" x2="890" y2="310" stroke="#e5e5ea" stroke-width="2"/>
+<text x="155" y="315" text-anchor="end" font-size="15" fill="#008965">inner2</text>
+<line x1="190" y1="370" x2="890" y2="370" stroke="#e5e5ea" stroke-width="2"/>
+<text x="155" y="375" text-anchor="end" font-size="15" fill="#86868b">bottom</text>
+<rect x="305" y="182" width="70" height="196" rx="4" fill="#e6bf77"/>
+<rect x="325" y="181" width="30" height="198" fill="#fff"/>
+<text x="340" y="155" text-anchor="middle" font-size="16" font-weight="600">VA</text>
+<rect x="705" y="182" width="70" height="196" rx="4" fill="#e6bf77"/>
+<rect x="725" y="181" width="30" height="198" fill="#fff"/>
+<text x="740" y="155" text-anchor="middle" font-size="16" font-weight="600">VB</text>
+<line x1="340" y1="310" x2="740" y2="310" stroke="#008965" stroke-width="20" stroke-linecap="round"/>
+<circle cx="340" cy="190" r="7" fill="#008965" stroke="#fff" stroke-width="2"/>
+<circle cx="340" cy="250" r="7" fill="#008965" stroke="#fff" stroke-width="2"/>
+<circle cx="340" cy="310" r="7" fill="#008965" stroke="#fff" stroke-width="2"/>
+<circle cx="340" cy="370" r="7" fill="#008965" stroke="#fff" stroke-width="2"/>
+<circle cx="740" cy="190" r="7" fill="#008965" stroke="#fff" stroke-width="2"/>
+<circle cx="740" cy="250" r="7" fill="#008965" stroke="#fff" stroke-width="2"/>
+<circle cx="740" cy="310" r="7" fill="#008965" stroke="#fff" stroke-width="2"/>
+<circle cx="740" cy="370" r="7" fill="#008965" stroke="#fff" stroke-width="2"/>
+<text x="540" y="425" text-anchor="middle" font-size="16" fill="#1d1d1f">Inner2 copper joins both barrels.</text>
+<text x="540" y="451" text-anchor="middle" font-size="13" fill="#86868b">8 ports · 1 traces · 0 missing-port errors</text>
+<text x="540" y="499" text-anchor="middle" font-size="11" fill="#a1a1a6">Emitted Circuit JSON · section at y = 0 · layer spacing exaggerated</text>
+</g></svg>
