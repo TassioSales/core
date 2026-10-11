@@ -1,0 +1,61 @@
+bun test v1.3.14 (0d9b296a)
+
+tests/features/ten-layer-blind-buried-via-opt-in.test.tsx:
+(pass) allowBlindAndBuriedVias preserves logical autorouted via spans [605.76ms]
+
+tests/features/pcb-style-via-diameter.test.tsx:
+(pass) pcbStyle sets default via diameters [69.12ms]
+
+tests/features/autorouter-pcb-style-via-diameter.test.tsx:
+(pass) autorouter uses pcbStyle via dimensions for routed vias [1827.76ms]
+
+tests/utils/saved-trace-via-contact-widths.test.ts:
+(pass) via contacts use adjacent widths rather than the first taper width [1.37ms]
+
+tests/utils/get-autorouted-via-layers.test.ts:
+(pass) autorouted vias use the board's physical span policy [0.28ms]
+
+tests/repros/repro-through-via-inner-layer-missing-barrel.test.tsx:
+(pass) a missing through barrel leaves the top escape disconnected from inner2 [4336.09ms]
+
+tests/repros/repro-through-via-inner-layer-connectivity.test.tsx:
+(pass) through-via barrels connect separate top escapes to an inner2 bridge [1529.05ms]
+
+tests/breakout/fanout-saved-trace-paths-via-endpoints.test.tsx:
+(pass) saved fanout paths support leading and trailing vias [8904.10ms]
+
+tests/components/primitive-components/trace-pcb-path-vias.test.tsx:
+(pass) trace pcbPath supports vias with inner layer transitions [2264.25ms]
+
+tests/components/primitive-components/trace-manual-pcb-path-free-end.test.tsx:
+(pass) manual pcbPath can extend outward from a chip port without connecting to another port [8019.80ms]
+
+tests/components/primitive-components/trace-pcb-path-thickness-with-empty-array.test.tsx:
+(pass) trace pcbPath selectors can set thickness [7690.07ms]
+
+tests/components/primitive-components/via-layer-span.test.tsx:
+(pass) pcb_via.layers includes intermediate inner layers on a 4-layer board [67.21ms]
+(pass) pcb_via.layers spans only the crossed layers for a partial-span via [33.33ms]
+(pass) pcb_via.layers stays [top, bottom] on a 2-layer board [48.58ms]
+
+tests/components/primitive-components/trace-with-pcb-path.test.tsx:
+(pass) trace with manual pcbPath [6834.38ms]
+
+tests/components/primitive-components/trace-multiple-pcb-paths.test.tsx:
+(pass) one trace can render multiple independent pcb paths [6622.49ms]
+
+tests/components/primitive-components/trace-pcb-path-selectors.test.tsx:
+(pass) trace pcbPath supports selectors [4319.39ms]
+(pass) trace pcbPath selectors can set thickness [1426.42ms]
+(pass) trace pcbPath selectors with kicad footprints [1918.05ms]
+
+tests/components/primitive-components/via-layer-span-ten-layers.test.tsx:
+(pass) a deep blind via spans through inner8 on a ten-layer board [82.01ms]
+
+tests/components/normal-components/board-imported-via-policy.test.tsx:
+(pass) imported pcb_board via policies survive inflation [319.66ms]
+
+ 21 pass
+ 0 fail
+ 88 expect() calls
+Ran 21 tests across 17 files. [61.39s]

@@ -1,0 +1,6 @@
+$ bun run scripts/smoke-tests/test-dist-simple-circuit.tsx && bun run scripts/smoke-tests/check-dist-bundled-schematic-solver.ts
+Rendering circuit from dist...
+Validating circuit JSON...
+
+Smoke test passed: Basic circuit JSON validation successful!
+Schematic trace solver is bundled in Core's JavaScript and types

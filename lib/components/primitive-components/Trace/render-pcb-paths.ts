@@ -1,6 +1,6 @@
 import type { PcbPath } from "@tscircuit/props"
 import type { LayerRef } from "circuit-json"
-import { getViaSpanLayers } from "lib/utils/getViaSpanLayers"
+import { getAutoroutedViaLayers } from "lib/utils/getViaSpanLayers"
 import { getViaDiameterDefaults } from "../../../utils/pcbStyle/getViaDiameterDefaults"
 import type { Port } from "../Port"
 import { getRouteForPcbPath } from "./get-route-for-pcb-path"
@@ -75,10 +75,13 @@ export const renderPcbPaths = ({
         y: point.y,
         hole_diameter: holeDiameter,
         outer_diameter: padDiameter,
-        layers: getViaSpanLayers({
+        layers: getAutoroutedViaLayers({
           fromLayer,
           toLayer,
           layerCount: subcircuit._getSubcircuitLayerCount(),
+          allowBlindAndBuriedVias: trace
+            ._getBoard()
+            ?.getInheritedProperty("allowBlindAndBuriedVias"),
         }),
         from_layer: fromLayer,
         to_layer: toLayer,

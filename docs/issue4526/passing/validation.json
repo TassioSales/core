@@ -1,0 +1,47 @@
+{
+  "regression": {
+    "command": "bun test tests/repros/repro4526-manual-via-physical-span.test.tsx",
+    "exitCode": 0,
+    "pass": 18,
+    "fail": 0,
+    "assertions": 128,
+    "expectedSvgBaselinesVerifiedOnSecondRun": true
+  },
+  "relatedTests": {
+    "command": "bun test <files in related-test-files.txt> --timeout 30000",
+    "exitCode": 0,
+    "pass": 21,
+    "fail": 0,
+    "files": 17
+  },
+  "checks": [
+    {
+      "command": "bunx tsc --noEmit",
+      "exitCode": 0
+    },
+    {
+      "command": "bun run build",
+      "exitCode": 0
+    },
+    {
+      "command": "bun run smoke-test:dist",
+      "exitCode": 0
+    },
+    {
+      "command": "bunx biome format <six changed TS/TSX files>",
+      "exitCode": 0
+    },
+    {
+      "command": "bunx biome lint <six changed TS/TSX files>",
+      "exitCode": 0
+    }
+  ],
+  "observedComparison": {
+    "casesPreservingNonSpanViaFields": 18,
+    "enabledCasesWithIdenticalViaRecords": 6
+  },
+  "visualInspection": [
+    "pcbPath failing/passing and pixel diff",
+    "pcbPaths failing/passing and pixel diff"
+  ]
+}
