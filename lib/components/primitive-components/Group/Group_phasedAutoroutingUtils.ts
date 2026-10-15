@@ -15,9 +15,25 @@ import { getPairedBreakoutExitTarget } from "./getPairedBreakoutExitTarget"
 export function connectionIsInRoutingPhase(
   connection: SimpleRouteConnection,
   phasePlan: RoutingPhasePlan,
+  allConnections?: readonly SimpleRouteConnection[],
 ): boolean {
   if (connection.routingPcbGroupId) {
     return connection.routingPcbGroupId === phasePlan.routingPcbGroupId
+  }
+
+  // When a phase is scoped to a breakout group, any trace that already has an
+  // internal breakout connection in this phase belongs to that breakout connection;
+  // its external / parent continuation must not be routed inside the breakout.
+  if (
+    phasePlan.routingPcbGroupId &&
+    connection.source_trace_id &&
+    allConnections?.some(
+      (c) =>
+        c.routingPcbGroupId === phasePlan.routingPcbGroupId &&
+        c.source_trace_id === connection.source_trace_id,
+    )
+  ) {
+    return false
   }
 
   for (const trace of phasePlan.traces) {
@@ -54,7 +70,13 @@ export function Group_filterSimpleRouteJsonForPhase(
 ): SimpleRouteJson {
   const connections: SimpleRouteConnection[] = []
   for (const connection of simpleRouteJson.connections) {
-    if (connectionIsInRoutingPhase(connection, phasePlan)) {
+    if (
+      connectionIsInRoutingPhase(
+        connection,
+        phasePlan,
+        simpleRouteJson.connections,
+      )
+    ) {
       connections.push(connection)
     }
   }

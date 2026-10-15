@@ -1331,9 +1331,16 @@ export class Group<Props extends z.ZodType<any, any, any> = typeof groupProps>
       ])
 
       return baseSimpleRouteJson.connections.some((connection) => {
-        if (!connectionIsInRoutingPhase(connection, routingPhasePlan)) {
+        if (
+          !connectionIsInRoutingPhase(
+            connection,
+            routingPhasePlan,
+            baseSimpleRouteJson.connections,
+          )
+        ) {
           return false
         }
+
         return (
           sourceTraceIds.has(connection.name) ||
           (connection.source_trace_id
